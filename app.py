@@ -1,6 +1,7 @@
 # Packages
 from textblob.classifiers import NaiveBayesClassifier
 from textblob import TextBlob
+import matplotlib.pyplot as plt
 from PIL import Image
 import streamlit as st 
 import pandas as pd
@@ -31,7 +32,7 @@ def Sentiment_analysis(sentence):
 def Word_similarity(words):
 	tokens = nlp(words)
 	t1, t2 = tokens[0], tokens[1]
-	return "Similarity :" + str(t1.similarity(t2))
+	return str(t1.similarity(t2))
 
 def Parts_of_speech_tagging(sentence):
 	doc = nlp(sentence)
@@ -42,6 +43,12 @@ def Parts_of_speech_tagging(sentence):
 	    d = pd.concat([d,temp])
 	st.write(d)
 	
+def visualize_word_similarity(score):
+	size = [score, 1.0]
+	plt.title('word similarity')
+	plt.pie(size, colors=['green','red'], labels=['similarity','non-similarity'], startangle=90)
+	st.pyplot()
+
 # Main driver 
 image = Image.open('images/nlp.jpg')
 st.image(image, caption='Natural Language Processing',use_column_width=True)
@@ -71,7 +78,9 @@ if option == 'Word similarity':
 	st.write('Simple word similarity identifier using Spacy')
 	words = st.text_input("Enter words with space:")
 	if words != '':
-		st.write(Word_similarity(words))
+		score = Word_similarity(words)
+		st.write(score)
+		visualize_word_similarity(score)
 
 if option == 'Parts-of-speech tagging':
 	st.write('Simple Parts_of_speech_tagging using Spacy')
