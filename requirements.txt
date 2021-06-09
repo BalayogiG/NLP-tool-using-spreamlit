@@ -1,7 +1,7 @@
-streamlit==0.55.0
-pandas==1.0.1
-textblob==0.15.3
-spacy==2.2.3
-pillow==8.1.0
-matplotlib==3.2.2
-xlrd==1.2.0
+streamlit
+pandas
+textblob
+spacy
+pillow
+matplotlib
+xlrd
